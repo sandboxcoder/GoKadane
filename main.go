@@ -14,4 +14,5 @@ func main() {
 	upVector := core.Vector3{X: 0, Y: 1, Z: 0}
 	rightVector := core.Vector3{X: 1, Y: 0, Z: 0}
 	fmt.Println("Two othogonal vectors:", upVector.Dot(rightVector))
+	fmt.Println("Mag ", upVector.Mag())
 }
