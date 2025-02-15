@@ -8,6 +8,10 @@ import (
 func main() {
 	fmt.Println("Simple algorithm test program")
 
-	t := core.NewTriangle(5, 5)
-	fmt.Println(t.Area())
+	newTriangle := core.NewTriangle(5, 5)
+	fmt.Println("area:", newTriangle.Area())
+
+	upVector := core.Vector3{X: 0, Y: 1, Z: 0}
+	rightVector := core.Vector3{X: 1, Y: 0, Z: 0}
+	fmt.Println("Two othogonal vectors:", upVector.Dot(rightVector))
 }
