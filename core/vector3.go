@@ -17,3 +17,14 @@ func (v Vector3) Dot(other Vector3) float64 {
 func (v Vector3) Mag() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y + v.Z*v.Z)
 }
+
+// Normalizes the non-zero 3d vector
+func (v *Vector3) Normalize() {
+	magnitude := v.Mag()
+	if magnitude == 0 {
+		return // Avoid division by zero
+	}
+	v.X /= magnitude
+	v.Y /= magnitude
+	v.Z /= magnitude
+}
