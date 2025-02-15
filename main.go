@@ -9,5 +9,5 @@ func main() {
 	fmt.Println("Simple algorithm test program")
 
 	t := core.NewTriangle(5, 5)
-	fmt.Println(core.Area(t))
+	fmt.Println(t.Area())
 }
