@@ -21,5 +21,5 @@ func main() {
 	fmt.Println("Normalized vec ", testVec)
 
 	crossProduct := upVector.Cross(leftVector)
-	fmt.Println("Cross product (up X left):", crossProduct)
+	fmt.Println("Cross product (up X left) = back vector:", crossProduct)
 }
