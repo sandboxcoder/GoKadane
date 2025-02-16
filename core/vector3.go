@@ -28,3 +28,11 @@ func (v *Vector3) Normalize() {
 	v.Y /= magnitude
 	v.Z /= magnitude
 }
+
+func (a Vector3) Cross(b Vector3) Vector3 {
+	return Vector3{
+		X: (a.Y*b.Z - a.Z*b.Y),
+		Y: (a.Z*b.X - a.X*b.Z),
+		Z: (a.X*b.Y - a.Y*b.X),
+	}
+}

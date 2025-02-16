@@ -19,4 +19,7 @@ func main() {
 	testVec := core.Vector3{X: 0, Y: 2, Z: 0}
 	testVec.Normalize()
 	fmt.Println("Normalized vec ", testVec)
+
+	crossProduct := upVector.Cross(leftVector)
+	fmt.Println("Cross product (up X left):", crossProduct)
 }
