@@ -22,4 +22,8 @@ func main() {
 
 	crossProduct := upVector.Cross(leftVector)
 	fmt.Println("Cross product (up X left) = back vector:", crossProduct)
+
+	arr := []int{-10, -3, -1}
+	maxSub := core.MaximumSubArray(arr)
+	fmt.Println("maximumSubArray value for {-10,-3,-1} is", maxSub)
 }
