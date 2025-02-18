@@ -6,3 +6,8 @@ Make sure [Golang](https://go.dev/doc/install) is installed. From command line j
 ```
 go run .
 ```
+
+# How to run the tests
+```
+go test -v ./...
+```
