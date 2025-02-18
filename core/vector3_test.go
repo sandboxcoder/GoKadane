@@ -11,3 +11,13 @@ func TestCross(t *testing.T) {
 		t.Errorf("up.Cross(right) = %+v, expected %+v", depth, expected)
 	}
 }
+
+func TestDot(t *testing.T) {
+	up := Vector3{0, 1, 0}
+	right := Vector3{1, 0, 0}
+	depth := up.Dot(right)
+	expected := 0.0
+	if depth != expected {
+		t.Errorf("up.Dot(right) = %+v, expected %+v", depth, expected)
+	}
+}
