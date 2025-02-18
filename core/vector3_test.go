@@ -21,3 +21,12 @@ func TestDot(t *testing.T) {
 		t.Errorf("up.Dot(right) = %+v, expected %+v", depth, expected)
 	}
 }
+
+func TestMag(t *testing.T) {
+	v := Vector3{0, 3, 0}
+	expected := 3.0
+	result := v.Mag()
+	if v.Mag() != expected {
+		t.Errorf("vector.Mag() != 3, val %f expected %f", result, expected)
+	}
+}
