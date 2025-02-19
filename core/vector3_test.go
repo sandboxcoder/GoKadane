@@ -55,7 +55,7 @@ func TestMult(t *testing.T) {
 	a := Vector3{4, 4, 4}
 	var b float64 = 2
 	expected := Vector3{8, 8, 8}
-	result := a.Mult(b)
+	result := a.Mul(b)
 	if result != expected {
 		t.Errorf("vector.Mult() != expected, val %f expected %f", result, expected)
 	}
