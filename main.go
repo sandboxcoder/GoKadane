@@ -8,7 +8,7 @@ import (
 func main() {
 	fmt.Println("Simple algorithm test program")
 
-	newTriangle := core.NewTriangle(5, 5)
+	newTriangle := core.Triangle{Base: 5, Height: 5}
 	fmt.Println("area:", newTriangle.Area())
 
 	upVector := core.Vector3{X: 0, Y: 1, Z: 0}

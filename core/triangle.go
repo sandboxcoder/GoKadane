@@ -1,14 +1,9 @@
 package core
 
 type Triangle struct {
-	base, height float64
+	Base, Height float64
 }
 
 func (t Triangle) Area() float64 {
-	return 0.5 * t.base * t.height
-}
-
-func NewTriangle(base, height float64) Triangle {
-	t := Triangle{base, height}
-	return t
+	return 0.5 * t.Base * t.Height
 }
