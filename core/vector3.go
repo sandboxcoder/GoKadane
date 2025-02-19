@@ -47,6 +47,6 @@ func (v1 Vector3) Sub(v2 Vector3) Vector3 {
 }
 
 // Multiplication operator
-func (v1 Vector3) Mult(scalar float64) Vector3 {
+func (v1 Vector3) Mul(scalar float64) Vector3 {
 	return Vector3{X: v1.X * scalar, Y: v1.Y * scalar, Z: v1.Z * scalar}
 }
