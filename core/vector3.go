@@ -36,3 +36,17 @@ func (a Vector3) Cross(b Vector3) Vector3 {
 		Z: a.X*b.Y - a.Y*b.X,
 	}
 }
+
+func (v1 Vector3) Add(v2 Vector3) Vector3 {
+	return Vector3{X: v1.X + v2.X, Y: v1.Y + v2.Y, Z: v1.Z + v2.Z}
+}
+
+// Subtraction operator
+func (v1 Vector3) Sub(v2 Vector3) Vector3 {
+	return Vector3{X: v1.X - v2.X, Y: v1.Y - v2.Y, Z: v1.Z - v2.Z}
+}
+
+// Multiplication operator
+func (v1 Vector3) Mult(scalar float64) Vector3 {
+	return Vector3{X: v1.X * scalar, Y: v1.Y * scalar, Z: v1.Z * scalar}
+}

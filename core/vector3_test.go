@@ -30,3 +30,33 @@ func TestMag(t *testing.T) {
 		t.Errorf("vector.Mag() != 3, val %f expected %f", result, expected)
 	}
 }
+
+func TestAdd(t *testing.T) {
+	a := Vector3{0, 3, 0}
+	var b Vector3 = Vector3{1, 1, 1}
+	expected := Vector3{1, 4, 1}
+	result := a.Add(b)
+	if result != expected {
+		t.Errorf("vector.Add() != expected, val %f expected %f", result, expected)
+	}
+}
+
+func TestSub(t *testing.T) {
+	a := Vector3{4, 4, 4}
+	var b Vector3 = Vector3{1, 1, 1}
+	expected := Vector3{3, 3, 3}
+	result := a.Sub(b)
+	if result != expected {
+		t.Errorf("vector.Sub() != expected, val %f expected %f", result, expected)
+	}
+}
+
+func TestMult(t *testing.T) {
+	a := Vector3{4, 4, 4}
+	var b float64 = 2
+	expected := Vector3{8, 8, 8}
+	result := a.Mult(b)
+	if result != expected {
+		t.Errorf("vector.Mult() != expected, val %f expected %f", result, expected)
+	}
+}
