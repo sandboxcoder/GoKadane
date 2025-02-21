@@ -17,11 +17,12 @@ type Plane struct {
 	Dist   float64 // Distance from a point to the plane.
 }
 
+// Constructs a "plane" based on 3 vectors
 func BuildPlane(A Vector3, B Vector3, C Vector3) Plane {
-	n := B.Sub(A).Cross(C.Sub(A)) // NORMAL = AB X AC
-	n.Normalize()
-	distFromPlane := -n.Dot(A)
-	p := Plane{Normal: n, Dist: distFromPlane}
+	planeNormal := B.Sub(A).Cross(C.Sub(A)) // NORMAL = AB X AC
+	planeNormal.Normalize()
+	distFromPlane := -planeNormal.Dot(A)
+	p := Plane{Normal: planeNormal, Dist: distFromPlane}
 	return p
 }
 
