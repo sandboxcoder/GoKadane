@@ -19,7 +19,7 @@ func TestBuildPlane(t *testing.T) {
 }
 
 func TestRayPlane(t *testing.T) {
-	p := Plane{Normal: Vector3{0.0, 1.0, 0.0}, Dist: -1}
+	p := Plane{Normal: Vector3{0.0, 1.0, 0.0}, Dist: 0}
 	rayOrigin := Vector3{0.0, 5.0, 0.0}
 	rayDir := Vector3{0, -1, 0}
 	var hitTime float64
@@ -27,6 +27,16 @@ func TestRayPlane(t *testing.T) {
 	result := p.RayIntersection(rayOrigin, rayDir, &hitTime, &hitPt)
 	if result != true {
 		t.Errorf("Expected the ray origin: %+v dir %+v to hit the plane %+v", rayOrigin, rayDir, p)
+	}
+
+	expectedTime := 5.0
+	if hitTime != expectedTime {
+		t.Errorf("Ray did not hit the plane at the expected time %f. Hit time was %f", expectedTime, hitTime)
+	}
+
+	expectedHitPt := Vector3{0, 0, 0}
+	if hitPt != expectedHitPt {
+		t.Errorf("Ray was expected to hit the plane at %+v", expectedHitPt)
 	}
 }
 

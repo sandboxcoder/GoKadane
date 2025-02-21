@@ -35,11 +35,10 @@ func (p Plane) RayIntersection(Start Vector3, Dir Vector3, time *float64, hitPt 
 		return false
 	}
 	dist := -(p.Normal.Dot(Start) + p.Dist)
-	tVal := dist / denom // CALC PARAMETRIC T-VAL
-	time = &tVal
-	if tVal > 0 { // IF INTERSECTION NOT "BEHIND" RAY
-		hitPoint := Start.Add(Dir).Mul(tVal) // CALC HIT POINT
-		hitPt = &hitPoint
+	*time = dist / denom // CALC PARAMETRIC T-VAL
+	if *time > 0 {       // IF INTERSECTION NOT "BEHIND" RAY
+		hitPoint := Start.Add(Dir.Mul(*time)) // CALC HIT POINT
+		*hitPt = hitPoint
 		return true // INTERSECTION FOUND!
 	}
 	return false
