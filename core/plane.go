@@ -1,5 +1,9 @@
 package core
 
+import (
+	"math"
+)
+
 type HalfSpace int
 
 const (
@@ -21,7 +25,22 @@ func BuildPlane(A Vector3, B Vector3, C Vector3) Plane {
 	return p
 }
 
-func (p Plane) RayIntersection(Start Vector3, Dir Vector3, t *float64, hitPt *Vector3) bool {
+func (p Plane) RayIntersection(Start Vector3, Dir Vector3, time *float64, hitPt *Vector3) bool {
+	denom := p.Normal.Dot(Dir)
+
+	//If denom > 0 then the normal of the plane is pointing away from the ray
+	//If denom==0 RAY AND PLANE ARE PARALLEL
+	if math.Abs(denom) <= 1e-4 {
+		return false
+	}
+	dist := -(p.Normal.Dot(Start) + p.Dist)
+	tVal := dist / denom // CALC PARAMETRIC T-VAL
+	time = &tVal
+	if tVal > 0 { // IF INTERSECTION NOT "BEHIND" RAY
+		hitPoint := Start.Add(Dir).Mul(tVal) // CALC HIT POINT
+		hitPt = &hitPoint
+		return true // INTERSECTION FOUND!
+	}
 	return false
 }
 

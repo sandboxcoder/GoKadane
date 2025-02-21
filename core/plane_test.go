@@ -38,3 +38,15 @@ func TestClasifyPoint_OnPlane(t *testing.T) {
 		t.Errorf("Expected the point %+v to lie on the plane %+v. Not %+v", pt, plane, side)
 	}
 }
+
+func TestRay(t *testing.T) {
+	plane := Plane{Normal: Vector3{0.0, 1.0, 0.0}, Dist: 0}
+	rayOrigin := Vector3{0, 5, 0}
+	rayDir := Vector3{0, -1, 0}
+	var time float64
+	var hitPoint Vector3
+	hitPlane := plane.RayIntersection(rayOrigin, rayDir, &time, &hitPoint)
+	if hitPlane != true {
+		t.Errorf("Expected to hit the plane %+v from origin %+v dir %+v", plane, rayOrigin, rayDir)
+	}
+}
