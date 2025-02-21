@@ -25,6 +25,17 @@ func (p Plane) RayIntersection(Start Vector3, Dir Vector3, t *float64, hitPt *Ve
 	return false
 }
 
-func (p Plane) ClassifyPoint(pt Vector3) HalfSpace {
+func (p Plane) DistanceTo(point Vector3) float64 {
+	return point.Dot(p.Normal) + p.Dist
+}
+
+func (p Plane) ClassifyPoint(point Vector3) HalfSpace {
+	d := p.DistanceTo(point)
+	if d == 0 {
+		return HalfSpace_ON_PLANE
+	}
+	if d > 0 {
+		return HalfSpace_FRONT
+	}
 	return HalfSpace_BEHIND
 }

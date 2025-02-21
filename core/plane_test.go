@@ -31,10 +31,10 @@ func TestRayPlane(t *testing.T) {
 }
 
 func TestClasifyPoint_OnPlane(t *testing.T) {
-	plane := Plane{Normal: Vector3{0.0, 1.0, 0.0}, Dist: -1}
+	plane := Plane{Normal: Vector3{0.0, 1.0, 0.0}, Dist: 0}
 	pt := Vector3{0, 0, 0}
 	side := plane.ClassifyPoint(pt)
 	if side != HalfSpace_ON_PLANE {
-		t.Errorf("Expected the point %+v to lie on the plane %+v", pt, plane)
+		t.Errorf("Expected the point %+v to lie on the plane %+v. Not %+v", pt, plane, side)
 	}
 }
