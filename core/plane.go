@@ -3,14 +3,14 @@ package core
 type HalfSpace int
 
 const (
-	HalfSpace_BEHIND HalfSpace = iota
-	HalfSpace_ON_PLANE
+	HalfSpace_ON_PLANE HalfSpace = iota
+	HalfSpace_BEHIND
 	HalfSpace_FRONT
 )
 
 type Plane struct {
-	Normal Vector3
-	Dist   float64
+	Normal Vector3 // Normalized vector perpendicular to the plane
+	Dist   float64 // Distance from a point to the plane.
 }
 
 func BuildPlane(A Vector3, B Vector3, C Vector3) Plane {
