@@ -18,6 +18,10 @@ func (v Vector3) Mag() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y + v.Z*v.Z)
 }
 
+func (v Vector3) LengthSquared() float64 {
+	return (v.X*v.X + v.Y*v.Y + v.Z*v.Z)
+}
+
 // Normalizes the non-zero 3d vector
 func (v *Vector3) Normalize() {
 	magnitude := v.Mag()
