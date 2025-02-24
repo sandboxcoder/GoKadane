@@ -26,6 +26,7 @@ func BuildPlane(A Vector3, B Vector3, C Vector3) Plane {
 	return p
 }
 
+// Plane vs Ray test
 func (p Plane) RayIntersection(Start Vector3, Dir Vector3, time *float64, hitPt *Vector3) bool {
 	denom := p.Normal.Dot(Dir)
 
