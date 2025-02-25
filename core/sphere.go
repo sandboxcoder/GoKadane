@@ -11,3 +11,12 @@ func checkCollision(s1 Sphere, s2 Sphere) bool {
 	radiusSum := s1.Radius + s2.Radius
 	return distanceSquared <= radiusSum*radiusSum
 }
+
+func (s *Sphere) isColliding(p Plane) bool {
+	result := false
+	dist := p.DistanceTo(s.Center)
+	if dist <= s.Radius {
+		result = true
+	}
+	return result
+}

@@ -21,3 +21,13 @@ func TestSphereCollision_Seperated(t *testing.T) {
 		t.Errorf("checkCollision() != expected, returned %+v instead of %+v", detectedCollision, expected)
 	}
 }
+
+func TestIsCollidingWithPlane(t *testing.T) {
+	testSphere := Sphere{Vector3{0, 0, 0}, 20}
+	normal := Vector3{0.0, 1.0, 0.0}
+	p := Plane{Normal: normal, Dist: 0}
+	result := testSphere.isColliding(p)
+	if result != true {
+		t.Errorf("sphere.isColliding() != expected, expected it to be on the plane")
+	}
+}
