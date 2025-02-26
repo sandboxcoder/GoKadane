@@ -31,3 +31,14 @@ func TestIsCollidingWithPlane(t *testing.T) {
 		t.Errorf("sphere.isColliding() != expected, expected it to be on the plane")
 	}
 }
+
+func TestIsCollidingWithPlane_Separated(t *testing.T) {
+	testSphere := Sphere{Vector3{0, 90, 0}, 5}
+	normal := Vector3{0.0, 1.0, 0.0}
+	p := Plane{Normal: normal, Dist: 0}
+	result := testSphere.isColliding(p)
+	expected := false
+	if result != expected {
+		t.Errorf("sphere.isColliding() != expected, expected it to not be on the plane")
+	}
+}
