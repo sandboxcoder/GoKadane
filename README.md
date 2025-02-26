@@ -9,5 +9,5 @@ go run .
 
 # How to run the tests from command line
 ```
-go test -v ./...
+go test -v Kadane/core
 ```
