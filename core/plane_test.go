@@ -54,7 +54,7 @@ func TestClasifyPoint_Front(t *testing.T) {
 	pt := Vector3{0, 5, 0}
 	side := plane.ClassifyPoint(pt)
 	if side != HalfSpace_FRONT {
-		t.Errorf("Expected the point %+v to lie on the plane %+v. Not %+v", pt, plane, side)
+		t.Errorf("Expected the point %+v to lie infront of the plane %+v. Not %+v", pt, plane, side)
 	}
 }
 
@@ -63,7 +63,7 @@ func TestClasifyPoint_Behind(t *testing.T) {
 	pt := Vector3{0, -5, 0}
 	side := plane.ClassifyPoint(pt)
 	if side != HalfSpace_BEHIND {
-		t.Errorf("Expected the point %+v to lie on the plane %+v. Not %+v", pt, plane, side)
+		t.Errorf("Expected the point %+v to lie behind the plane %+v. Not %+v", pt, plane, side)
 	}
 }
 
