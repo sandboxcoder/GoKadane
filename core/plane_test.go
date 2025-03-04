@@ -49,6 +49,15 @@ func TestClasifyPoint_OnPlane(t *testing.T) {
 	}
 }
 
+func TestClasifyPoint_Front(t *testing.T) {
+	plane := Plane{Normal: Vector3{0.0, 1.0, 0.0}, Dist: 0}
+	pt := Vector3{0, 5, 0}
+	side := plane.ClassifyPoint(pt)
+	if side != HalfSpace_FRONT {
+		t.Errorf("Expected the point %+v to lie on the plane %+v. Not %+v", pt, plane, side)
+	}
+}
+
 func TestRay(t *testing.T) {
 	plane := Plane{Normal: Vector3{0.0, 1.0, 0.0}, Dist: 0}
 	rayOrigin := Vector3{0, 5, 0}
