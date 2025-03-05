@@ -24,8 +24,8 @@ func (b Box) GetMax() Vector3 {
 }
 
 func (b Box) Size() float64 {
-	diagonal := b.Extent.Mag()
-	return diagonal * 2
+	len := b.Extent.Mag()
+	return len * 2
 }
 
 func (b Box) GetSphere() Sphere {
