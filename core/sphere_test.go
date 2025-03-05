@@ -42,3 +42,13 @@ func TestIsCollidingWithPlane_Separated(t *testing.T) {
 		t.Errorf("sphere.isColliding() != expected, expected it to not be on the plane")
 	}
 }
+
+func TestBoundingBox(t *testing.T) {
+	testSphere := Sphere{Vector3{0, 0, 0}, 5}
+	box := testSphere.GetBoundingBox()
+	centerMatches := box.Center == testSphere.Center
+	extentMatches := box.Extent.X == testSphere.Radius && box.Extent.Y == testSphere.Radius && box.Extent.Z == testSphere.Radius
+	if !centerMatches || !extentMatches {
+		t.Errorf("sphere.GetBoundingBox() != expected, expected the bounding box to overlap the sphere")
+	}
+}
