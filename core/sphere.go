@@ -20,3 +20,10 @@ func (s *Sphere) isColliding(p Plane) bool {
 	}
 	return result
 }
+
+// Returns a bounding box that encloses the sphere
+func (s Sphere) GetBoundingBox() Box {
+	extent := Vector3{s.Radius, s.Radius, s.Radius}
+	b := Box{Center: s.Center, Extent: extent}
+	return b
+}
