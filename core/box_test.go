@@ -44,3 +44,26 @@ func TestExtent(t *testing.T) {
 		t.Errorf("Size() != expected, returned %+v instead of expected value %f", result, expected)
 	}
 }
+
+func TestGetSphere_Center(t *testing.T) {
+	center := Vector3{0, 0, 0}
+	b1 := Box{Center: center, Extent: Vector3{X: 5.0, Y: 5.0, Z: 5.0}}
+	sphere := b1.GetSphere()
+	result := sphere.Center == b1.Center
+	expected := true
+	if result != expected {
+		t.Errorf("GetSphere() != expected, returned %+v instead of expected value %+v", result, expected)
+	}
+}
+
+func TestGetSphere_Radius(t *testing.T) {
+	center := Vector3{0, 0, 0}
+	b1 := Box{Center: center, Extent: Vector3{X: 5.0, Y: 5.0, Z: 5.0}}
+	sphere := b1.GetSphere()
+	// Verify the sphere encloses the box
+	result := sphere.Radius > b1.Extent.X && sphere.Radius > b1.Extent.Y && sphere.Radius > b1.Extent.Z
+	expected := true
+	if result != expected {
+		t.Errorf("GetSphere() != expected, returned %+v instead of expected value %+v. Sphere Radius is %f", result, expected, sphere.Radius)
+	}
+}
