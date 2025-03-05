@@ -23,7 +23,7 @@ func (b Box) GetMax() Vector3 {
 	return max
 }
 
-func (b Box) Size() float64 {
+func (b Box) GetSize() float64 {
 	len := b.Extent.Mag()
 	return len * 2
 }
