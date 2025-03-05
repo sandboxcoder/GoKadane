@@ -1,9 +1,5 @@
 package core
 
-import (
-	"fmt"
-)
-
 type BoundaryType int
 
 const (
@@ -13,8 +9,7 @@ const (
 
 // Encapsulates the collision boundary for an object.
 type CollisionPrimitive struct {
-	Center Vector3
-	Extent Vector3
+	Box
 	BoundaryType
 }
 
@@ -42,28 +37,13 @@ func (c CollisionPrimitive) GetBoundingBox() Box {
 	return b
 }
 
-func (c CollisionPrimitive) GetSphere() Sphere {
-	var s Sphere
-	if c.BoundaryType == Bounds_BoundingBox {
-		box := Box{c.Center, c.Extent}
-		s = box.GetSphere()
-	} else if c.BoundaryType == Bounds_SPHERE {
-		s = Sphere{c.Center, c.Extent.X}
-	} else {
-		s = Sphere{c.Center, c.Extent.X}
-		fmt.Printf("Warn: Unknown primitive type %+v", c.BoundaryType)
-	}
-	return s
-}
-
 func (a CollisionPrimitive) boxOverlaps(b CollisionPrimitive) bool {
-	box1 := Box{a.Center, a.Extent}
 	box2 := Box{b.Center, b.Extent}
-	return box1.Overlaps(box2)
+	return a.Overlaps(box2)
 }
 
 func (a CollisionPrimitive) sphereOverlaps(b CollisionPrimitive) bool {
-	s1 := Sphere{a.Center, a.Extent.X}
-	s2 := Sphere{b.Center, b.Extent.X}
+	s1 := a.GetSphere()
+	s2 := b.GetSphere()
 	return IsColliding(s1, s2)
 }

@@ -39,6 +39,6 @@ func (b Box) GetSphere() Sphere {
 }
 
 func (b Box) GetPrimitive() CollisionPrimitive {
-	p := CollisionPrimitive{b.Center, b.Extent, Bounds_BoundingBox}
+	p := CollisionPrimitive{b, Bounds_BoundingBox}
 	return p
 }

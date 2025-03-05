@@ -29,6 +29,6 @@ func (s Sphere) GetBoundingBox() Box {
 }
 
 func (s Sphere) GetPrimitive() CollisionPrimitive {
-	p := CollisionPrimitive{s.Center, Vector3{s.Radius, s.Radius, s.Radius}, Bounds_SPHERE}
+	p := CollisionPrimitive{Box{s.Center, Vector3{s.Radius, s.Radius, s.Radius}}, Bounds_SPHERE}
 	return p
 }
