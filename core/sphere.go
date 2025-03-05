@@ -27,3 +27,8 @@ func (s Sphere) GetBoundingBox() Box {
 	b := Box{Center: s.Center, Extent: extent}
 	return b
 }
+
+func (s Sphere) GetPrimitive() CollisionPrimitive {
+	p := CollisionPrimitive{s.Center, Vector3{s.Radius, s.Radius, s.Radius}, Bounds_SPHERE}
+	return p
+}

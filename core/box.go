@@ -37,3 +37,8 @@ func (b Box) GetSphere() Sphere {
 	sphere.Radius = b.Extent.Mag()
 	return sphere
 }
+
+func (b Box) GetPrimitive() CollisionPrimitive {
+	p := CollisionPrimitive{b.Center, b.Extent, Bounds_BoundingBox}
+	return p
+}
