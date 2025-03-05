@@ -6,13 +6,13 @@ type Sphere struct {
 }
 
 // Static Sphere vs Sphere test
-func checkCollision(s1 Sphere, s2 Sphere) bool {
+func IsColliding(s1 Sphere, s2 Sphere) bool {
 	distanceSquared := s1.Center.Sub(s2.Center).LengthSquared()
 	radiusSum := s1.Radius + s2.Radius
 	return distanceSquared <= radiusSum*radiusSum
 }
 
-func (s *Sphere) isColliding(p Plane) bool {
+func (s *Sphere) IsColliding(p Plane) bool {
 	result := false
 	dist := p.DistanceTo(s.Center)
 	if dist <= s.Radius {
