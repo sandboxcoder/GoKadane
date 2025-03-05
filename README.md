@@ -14,4 +14,4 @@ go test -v Kadane/core
 
 # Differences from C#/C++
 
-Go doesnt utilize *operator overloading* or *inheritance* so needed to get a bit creative in the *Vector3* class where I wanted to implement Add, Subtract, and Multiply operations.
+Go doesnt utilize *operator overloading* so I needed to get a bit creative in the *Vector3* class where I wanted to implement Add, Subtract, and Multiply operations.
