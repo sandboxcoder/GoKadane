@@ -28,7 +28,8 @@ func (b Box) GetSize() float64 {
 	return len * 2
 }
 
-// Returns a sphere that encloses this box
+// Returns an "enlarged" sphere that encloses this box. The sphere radius is the
+// box extent.XYZ length.
 func (b Box) GetSphere() Sphere {
 	var sphere Sphere
 
