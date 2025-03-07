@@ -44,3 +44,17 @@ func TestCollisionPrimitive_SphereRadiusCheck(t *testing.T) {
 		t.Errorf("result != expected, returned %+v", result)
 	}
 }
+
+func TestCollisionPrimitive_SphereVsBox(t *testing.T) {
+	s := Sphere{Vector3{0, 0, 0}, 5}
+	a := s.GetPrimitive()
+
+	box := Box{Vector3{0, 0, 0}, Vector3{5, 5, 5}}
+	b := box.GetPrimitive()
+
+	result := a.IsColliding(b)
+	expect := true
+	if result != expect {
+		t.Errorf("result != expected, returned %+v", result)
+	}
+}

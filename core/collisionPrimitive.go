@@ -1,5 +1,11 @@
 package core
 
+import (
+	"errors"
+	"fmt"
+	"math"
+)
+
 type BoundaryType int
 
 const (
@@ -25,12 +31,55 @@ func (a CollisionPrimitive) IsColliding(b CollisionPrimitive) bool {
 			ret = a.sphereOverlaps(b)
 		}
 	} else {
-		// Converting a sphere into a box is not an ideal approx but we'll have to use that method.
-		// Converting a box -> sphere returns an even bigger volume which can trigger false positives.
-		// It's best not to compare different shapes since we don't have an actual Sphere vs Box algorithm.
-		ret = a.Overlaps(b.Box)
+		var err error
+		ret, err = isPrimitivesCollidingSphereVsBox(a, b)
+		if err != nil {
+			fmt.Println("Error:", err)
+			ret = a.Overlaps(b.Box)
+		}
 	}
 	return ret
+}
+
+func (c CollisionPrimitive) GetSphereOrBox(sphere *Sphere, bbox *Box) error {
+	var err error = nil
+	if c.BoundaryType == Bounds_BoundingBox {
+		*bbox = c.Box
+	} else if c.BoundaryType == Bounds_SPHERE {
+		*sphere = c.GetSphere()
+	} else {
+		err = errors.New("CollisionPrimitive is not using a handled type")
+	}
+	return err
+}
+
+// Checks Box vs Sphere
+func isPrimitivesCollidingSphereVsBox(a CollisionPrimitive, b CollisionPrimitive) (bool, error) {
+	var err error = nil
+	var ret bool = false
+	if a.BoundaryType == b.BoundaryType {
+		err = errors.New("CollisionPrimitive A & B should be using different types")
+	} else {
+		var bbox Box
+		var sphere Sphere
+		err = a.GetSphereOrBox(&sphere, &bbox)
+		if err != nil {
+			err = b.GetSphereOrBox(&sphere, &bbox)
+		}
+		ret = IsBoxCollidingWithSphere(bbox, sphere)
+	}
+
+	return ret, err
+}
+
+func IsBoxCollidingWithSphere(bbox Box, sphere Sphere) bool {
+	closestPoint := Vector3{
+		math.Max(bbox.Center.X-bbox.Extent.X, math.Min(sphere.Center.X, bbox.Center.X+bbox.Extent.X)),
+		math.Max(bbox.Center.Y-bbox.Extent.Y, math.Min(sphere.Center.Y, bbox.Center.Y+bbox.Extent.Y)),
+		math.Max(bbox.Center.Z-bbox.Extent.Z, math.Min(sphere.Center.Z, bbox.Center.Z+bbox.Extent.Z)),
+	}
+	distanceVec := sphere.Center.Sub(closestPoint)
+	return distanceVec.Mag() <= sphere.Radius
 }
 
 func (c CollisionPrimitive) GetSphere() Sphere {
