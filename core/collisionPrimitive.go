@@ -10,7 +10,7 @@ type BoundaryType int
 
 const (
 	Bounds_SPHERE BoundaryType = iota
-	Bounds_BoundingBox
+	Bounds_BOX
 )
 
 // Encapsulates the collision boundary for an object.
@@ -25,7 +25,7 @@ func (a CollisionPrimitive) IsColliding(b CollisionPrimitive) bool {
 		// This is the ideal scenario, where the collision primitives are the same type and no conversion
 		// is needed.
 		switch a.BoundaryType {
-		case Bounds_BoundingBox:
+		case Bounds_BOX:
 			ret = a.Overlaps(b.Box)
 		case Bounds_SPHERE:
 			ret = a.sphereOverlaps(b)
@@ -43,7 +43,7 @@ func (a CollisionPrimitive) IsColliding(b CollisionPrimitive) bool {
 
 func (c CollisionPrimitive) GetSphereOrBox(sphere *Sphere, bbox *Box) error {
 	var err error = nil
-	if c.BoundaryType == Bounds_BoundingBox {
+	if c.BoundaryType == Bounds_BOX {
 		*bbox = c.Box
 	} else if c.BoundaryType == Bounds_SPHERE {
 		*sphere = c.GetSphere()
