@@ -27,3 +27,20 @@ func TestCollisionPrimitiveOverlaps_NotIntersecting(t *testing.T) {
 		t.Errorf("result != expected, returned %+v", result)
 	}
 }
+
+// Verify collision primitive with an internal sphere shape can properly be restored.
+func TestCollisionPrimitive_SphereRadiusCheck(t *testing.T) {
+	s := Sphere{Vector3{0, 0, 0}, 5}
+	a := s.GetPrimitive()
+	s1 := a.GetSphere()
+
+	box := Box{Vector3{0, 0, 0}, Vector3{5, 5, 5}}
+	b := box.GetPrimitive()
+	// Bounding box will return an enlarged sphere
+	s2 := b.GetSphere()
+	result := s2.Radius == s1.Radius
+	expect := false
+	if result != expect {
+		t.Errorf("result != expected, returned %+v", result)
+	}
+}
