@@ -41,7 +41,7 @@ func (a CollisionPrimitive) IsColliding(b CollisionPrimitive) bool {
 	return ret
 }
 
-func (c CollisionPrimitive) GetSphereOrBox(sphere *Sphere, bbox *Box) error {
+func (c CollisionPrimitive) getSphereOrBox(sphere *Sphere, bbox *Box) error {
 	var err error = nil
 	if c.BoundaryType == Bounds_BOX {
 		*bbox = c.Box
@@ -62,9 +62,9 @@ func isPrimitivesCollidingSphereVsBox(a CollisionPrimitive, b CollisionPrimitive
 	} else {
 		var bbox Box
 		var sphere Sphere
-		err = a.GetSphereOrBox(&sphere, &bbox)
+		err = a.getSphereOrBox(&sphere, &bbox)
 		if err != nil {
-			err = b.GetSphereOrBox(&sphere, &bbox)
+			err = b.getSphereOrBox(&sphere, &bbox)
 		}
 		ret = IsBoxCollidingWithSphere(bbox, sphere)
 	}
