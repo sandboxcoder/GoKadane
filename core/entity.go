@@ -1,0 +1,33 @@
+package core
+
+type Entity struct {
+	position Vector3
+	velocity Vector3
+	CollisionPrimitive
+}
+
+func CreateEntity(pos Vector3, bound CollisionPrimitive) Entity {
+	entity := Entity{pos, Vector3{0, 0, 0}, bound}
+	return entity
+}
+
+func CreateEntityWithVelocity(pos Vector3, vel Vector3, bound CollisionPrimitive) Entity {
+	entity := Entity{pos, vel, bound}
+	return entity
+}
+
+func (entity *Entity) SetPosition(newPosition Vector3) {
+	entity.position = newPosition
+}
+
+func (entity Entity) GetPosition() Vector3 {
+	return entity.position
+}
+
+func (entity *Entity) SetVelocity(vel Vector3) {
+	entity.velocity = vel
+}
+
+func (entity Entity) GetVelocity() Vector3 {
+	return entity.velocity
+}
