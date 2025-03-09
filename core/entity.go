@@ -7,7 +7,9 @@ type Entity struct {
 }
 
 func CreateEntity(pos Vector3, bound CollisionPrimitive) Entity {
-	entity := Entity{pos, Vector3{0, 0, 0}, bound}
+	entity := Entity{}
+	entity.position = pos
+	entity.CollisionPrimitive = bound
 	return entity
 }
 
