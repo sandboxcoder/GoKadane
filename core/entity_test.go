@@ -54,3 +54,18 @@ func TestEntityVelocity(t *testing.T) {
 		t.Errorf("result != expected, velocity %+v", obj1.GetVelocity())
 	}
 }
+
+func TestEntityTick(t *testing.T) {
+	zeroPos := Vector3{0, 0, 0}
+	vel := Vector3{5, 0, 0}
+	sphere := Sphere{zeroPos, 5}
+	spherePrimitive := sphere.GetPrimitive()
+	obj1 := CreateEntityWithVelocity(zeroPos, vel, spherePrimitive)
+	obj1.Tick(1)
+	expectedPos := vel
+	result := obj1.GetPosition() == expectedPos
+	expect := true
+	if result != expect {
+		t.Errorf("result != expected, velocity %+v", obj1.GetVelocity())
+	}
+}

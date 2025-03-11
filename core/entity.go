@@ -33,3 +33,8 @@ func (entity *Entity) SetVelocity(vel Vector3) {
 func (entity Entity) GetVelocity() Vector3 {
 	return entity.velocity
 }
+
+func (entity *Entity) Tick(dt float64) {
+	newPos := entity.position.Add(entity.velocity.Mul(dt))
+	entity.position = newPos
+}
