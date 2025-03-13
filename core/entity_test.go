@@ -61,7 +61,7 @@ func TestEntityTick(t *testing.T) {
 	sphere := Sphere{zeroPos, 5}
 	spherePrimitive := sphere.GetPrimitive()
 	obj1 := CreateEntityWithVelocity(zeroPos, vel, spherePrimitive)
-	obj1.Tick(1)
+	obj1.DoTick(1)
 	expectedPos := vel
 	result := obj1.GetPosition() == expectedPos
 	expect := true
