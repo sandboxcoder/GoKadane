@@ -55,7 +55,7 @@ func TestEntityVelocity(t *testing.T) {
 	}
 }
 
-func TestEntityTick(t *testing.T) {
+func TestEntity_DoTick(t *testing.T) {
 	zeroPos := Vector3{0, 0, 0}
 	vel := Vector3{5, 0, 0}
 	sphere := Sphere{zeroPos, 5}
