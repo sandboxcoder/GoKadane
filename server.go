@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"os"
 	"runtime/debug"
-	"strings"
 )
 
 // Prints a usage message to os.Stderr (standard error).
@@ -20,8 +19,7 @@ func usage() {
 
 // Flag Variables (greeting and addr)
 var (
-	greeting = flag.String("g", "Hello", "Greet with `greeting`")
-	addr     = flag.String("addr", "localhost:8080", "address to serve")
+	addr = flag.String("addr", "localhost:8080", "address to serve")
 )
 
 func main() {
@@ -38,7 +36,7 @@ func main() {
 	// Register handlers.
 	// All requests not otherwise mapped with go to greet.
 	// /version is mapped specifically to version.
-	http.HandleFunc("/", greet)
+	http.HandleFunc("/", runGame)
 	http.HandleFunc("/version", version)
 
 	log.Printf("serving http://%s\n", *addr)
@@ -56,12 +54,8 @@ func version(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s\n", html.EscapeString(info.String()))
 }
 
-func greet(w http.ResponseWriter, r *http.Request) {
-	name := strings.Trim(r.URL.Path, "/")
-	if name == "" {
-		name = "Gopher"
-	}
-
+func runGame(w http.ResponseWriter, r *http.Request) {
+	world := CreateGameWorld()
 	fmt.Fprintf(w, "<!DOCTYPE html>\n")
-	fmt.Fprintf(w, "%s, %s!\n", *greeting, html.EscapeString(name))
+	fmt.Fprintf(w, "Currently there are %d entities in the game world.\n", world.GetNumEntities())
 }
