@@ -4,6 +4,11 @@ type World struct {
 	objects []Entity
 }
 
+func CreateWorld(entities []Entity) World {
+	world := World{entities}
+	return world
+}
+
 func (world *World) Init() {
 	world.objects = make([]Entity, 0, 5)
 }
