@@ -23,6 +23,6 @@ func (world *World) DoTick(dt float64) {
 	}
 }
 
-func (world *World) GetNumEntities() int {
+func (world World) GetNumEntities() int {
 	return len(world.objects)
 }
