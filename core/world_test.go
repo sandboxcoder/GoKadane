@@ -42,3 +42,33 @@ func TestWorld_DoTick(t *testing.T) {
 		}
 	}
 }
+
+func TestWorld_CreateWorld(t *testing.T) {
+	list := getEntities()
+	world := CreateWorld(list)
+	expected := 2
+	result := world.GetNumEntities()
+	if result != expected {
+		t.Errorf("result != expected, returned %+v instead of %+v", result, expected)
+	}
+}
+
+func TestWorld_CreateEmptyWorld(t *testing.T) {
+	world := CreateEmptyWorld()
+	expected := 0
+	result := world.GetNumEntities()
+	if result != expected {
+		t.Errorf("result != expected, returned %+v instead of %+v", result, expected)
+	}
+}
+
+func TestWorld_Reset(t *testing.T) {
+	list := getEntities()
+	world := CreateWorld(list)
+	world.ResetEntities()
+	expected := 0
+	result := world.GetNumEntities()
+	if result != expected {
+		t.Errorf("result != expected, returned %+v instead of %+v", result, expected)
+	}
+}
