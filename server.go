@@ -11,12 +11,14 @@ import (
 	"strings"
 )
 
+// Prints a usage message to os.Stderr (standard error).
 func usage() {
-	fmt.Fprintf(os.Stderr, "usage: helloserver [options]\n")
+	fmt.Fprintf(os.Stderr, "usage: server [options]\n")
 	flag.PrintDefaults()
 	os.Exit(2)
 }
 
+// Flag Variables (greeting and addr)
 var (
 	greeting = flag.String("g", "Hello", "Greet with `greeting`")
 	addr     = flag.String("addr", "localhost:8080", "address to serve")
