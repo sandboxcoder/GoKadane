@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Kadane/core"
 	"flag"
 	"fmt"
 	"html"
@@ -10,6 +11,8 @@ import (
 	"runtime/debug"
 )
 
+var world core.World
+
 // Prints a usage message to os.Stderr (standard error).
 func usage() {
 	fmt.Fprintf(os.Stderr, "usage: server [options]\n")
@@ -17,7 +20,7 @@ func usage() {
 	os.Exit(2)
 }
 
-// Flag Variables (greeting and addr)
+// Flag Variables (addr)
 var (
 	addr = flag.String("addr", "localhost:8080", "address to serve")
 )
@@ -32,6 +35,8 @@ func main() {
 	if len(args) != 0 {
 		usage()
 	}
+
+	world = CreateGameWorld()
 
 	// Register handlers.
 	// All requests not otherwise mapped with go to greet.
@@ -55,7 +60,6 @@ func version(w http.ResponseWriter, r *http.Request) {
 }
 
 func runGame(w http.ResponseWriter, r *http.Request) {
-	world := CreateGameWorld()
 	fmt.Fprintf(w, "<!DOCTYPE html>\n")
 	fmt.Fprintf(w, "Currently there are %d entities in the game world.\n", world.GetNumEntities())
 }
