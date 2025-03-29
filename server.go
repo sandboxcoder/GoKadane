@@ -9,9 +9,11 @@ import (
 	"net/http"
 	"os"
 	"runtime/debug"
+	"time"
 )
 
 var world core.World
+var running bool = true
 
 // Prints a usage message to os.Stderr (standard error).
 func usage() {
@@ -37,6 +39,7 @@ func main() {
 	}
 
 	world = CreateGameWorld()
+	go gameLoop()
 
 	// Register handlers.
 	// All requests not otherwise mapped with go to greet.
@@ -62,4 +65,29 @@ func version(w http.ResponseWriter, r *http.Request) {
 func runGame(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<!DOCTYPE html>\n")
 	fmt.Fprintf(w, "Currently there are %d entities in the game world.\n", world.GetNumEntities())
+}
+
+// Game loop function
+func gameLoop() {
+	const fps = 60
+	frameDuration := time.Second / fps
+
+	var elapsedTime time.Duration
+	for running {
+		startTime := time.Now()
+
+		// Game update logic
+		update(elapsedTime)
+
+		// Control frame rate
+		elapsedTime = time.Since(startTime)
+		sleepDuration := frameDuration - elapsedTime
+		if sleepDuration > 0 {
+			time.Sleep(sleepDuration)
+		}
+	}
+}
+
+func update(deltaTime time.Duration) {
+	world.DoTick(float64(deltaTime.Milliseconds()))
 }
