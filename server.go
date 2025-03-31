@@ -77,7 +77,7 @@ func gameLoop() {
 		startTime := time.Now()
 
 		// Game update logic
-		update(elapsedTime)
+		world.DoTick(float64(elapsedTime.Milliseconds()))
 
 		// Control frame rate
 		elapsedTime = time.Since(startTime)
@@ -86,8 +86,4 @@ func gameLoop() {
 			time.Sleep(sleepDuration)
 		}
 	}
-}
-
-func update(deltaTime time.Duration) {
-	world.DoTick(float64(deltaTime.Milliseconds()))
 }
