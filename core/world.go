@@ -1,33 +1,39 @@
 package core
 
 type World struct {
-	objects []Entity
+	objects map[int]Entity
+	nextId  int
 }
 
 func CreateWorld(entities []Entity) World {
-	world := World{entities}
+	world := CreateEmptyWorld()
+	for _, entity := range entities {
+		world.AddEntity(entity)
+	}
 	return world
 }
 
 func CreateEmptyWorld() World {
-	entities := make([]Entity, 0, 5)
-	world := World{entities}
+	entities := make(map[int]Entity)
+	world := World{entities, 0}
 	return world
 }
 
 func (world *World) ResetEntities() {
-	world.objects = make([]Entity, 0, 5)
+	world.objects = make(map[int]Entity)
 }
 
 func (world *World) AddEntity(entity Entity) {
-	world.objects = append(world.objects, entity)
+	// Note: it would be good to make sure nextId < MAX_INT
+	world.objects[world.nextId] = entity
+	world.nextId = world.nextId + 1
 }
 
 // Updates all the game objects in the game world.
 // dt = deltaTime, which is the time since the game world was last updated
 func (world *World) DoTick(dt float64) {
-	for i := 0; i < len(world.objects); i++ {
-		world.objects[i].DoTick(dt)
+	for _, entity := range world.objects {
+		entity.DoTick(dt)
 	}
 }
 

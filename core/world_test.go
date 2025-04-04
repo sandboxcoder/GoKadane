@@ -22,7 +22,7 @@ func getEntities() []Entity {
 
 func TestWorld_AddEntity(t *testing.T) {
 	list := getEntities()
-	world := World{list}
+	world := CreateWorld(list)
 	expected := 2
 	result := world.GetNumEntities()
 	if result != expected {
@@ -32,7 +32,7 @@ func TestWorld_AddEntity(t *testing.T) {
 
 func TestWorld_DoTick(t *testing.T) {
 	list := getEntities()
-	world := World{list}
+	world := CreateWorld(list)
 	world.DoTick(1)
 	expected := Vector3{1, 0, 0}
 	for _, entity := range world.objects {
