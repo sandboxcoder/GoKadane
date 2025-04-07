@@ -22,3 +22,8 @@ func (collection *EntityCollection) AddEntityWithVelocity(pos Vector3, vel Vecto
 	collection.objects = append(collection.objects, entity)
 	return entity
 }
+
+// Returns the number of game objects in the collection
+func (collection EntityCollection) Count() int {
+	return len(collection.objects)
+}

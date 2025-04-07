@@ -10,7 +10,7 @@ func TestEntityCollection_AddEntity(t *testing.T) {
 	spherePrimitive := sphere.GetPrimitive()
 	collection := EntityCollection{}
 	obj1 := collection.AddEntity(zeroPos, spherePrimitive)
-	result := obj1.GetId() == 1
+	result := obj1.GetId() == 1 && collection.Count() == 1
 	expect := true
 	if result != expect {
 		t.Errorf("result != expected, returned %+v", result)
@@ -24,7 +24,7 @@ func TestEntityCollection_AddEntityWithVelocity(t *testing.T) {
 	spherePrimitive := sphere.GetPrimitive()
 	collection := EntityCollection{}
 	obj1 := collection.AddEntityWithVelocity(zeroPos, vel, spherePrimitive)
-	result := obj1.GetVelocity() == vel && obj1.id != INVALID_ENTITY_ID
+	result := obj1.GetVelocity() == vel && obj1.id != INVALID_ENTITY_ID && collection.Count() == 1
 	expect := true
 	if result != expect {
 		t.Errorf("result != expected, velocity %+v", obj1.GetVelocity())
