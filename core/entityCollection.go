@@ -1,5 +1,6 @@
 package core
 
+// Collection of Entities. Manages entity id assignment
 type EntityCollection struct {
 	objects []Entity
 	id      uint32 // Default is INVALID_ENTITY_ID
