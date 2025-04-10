@@ -37,3 +37,7 @@ func (collection *EntityCollection) AddEntityWithVelocity(pos Vector3, vel Vecto
 func (collection EntityCollection) Count() int {
 	return len(collection.objects)
 }
+
+func (collection *EntityCollection) GetEntity(id int) Entity {
+	return collection.objects[id]
+}
