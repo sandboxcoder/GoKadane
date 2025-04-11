@@ -26,7 +26,7 @@ func (world *World) GetCollection() EntityCollection {
 // dt = deltaTime, which is the time since the game world was last updated
 func (world *World) DoTick(dt float64) {
 	for i := 0; i < world.objects.Count(); i++ {
-		entity := world.objects.GetEntity(i)
+		entity := world.objects.Get(i)
 		if entity.id != INVALID_ENTITY_ID {
 			entity.DoTick(dt)
 		}

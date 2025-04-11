@@ -38,6 +38,6 @@ func (collection EntityCollection) Count() int {
 	return len(collection.objects)
 }
 
-func (collection *EntityCollection) GetEntity(id int) Entity {
+func (collection *EntityCollection) Get(id int) Entity {
 	return collection.objects[id]
 }
