@@ -19,18 +19,23 @@ func (collection *EntityCollection) addEntity(entity *Entity) bool {
 	return ret
 }
 
-func (collection *EntityCollection) AddEntity(pos Vector3, bound CollisionPrimitive) Entity {
+func (collection *EntityCollection) AddEntity(pos Vector3, bound CollisionPrimitive) *Entity {
 	entity := Entity{}
 	entity.position = pos
 	entity.CollisionPrimitive = bound
 	collection.addEntity(&entity)
-	return entity
+	return &entity
 }
 
-func (collection *EntityCollection) AddEntityWithVelocity(pos Vector3, vel Vector3, bound CollisionPrimitive) Entity {
+func (collection *EntityCollection) AddEntityWithVelocity(pos Vector3, vel Vector3, bound CollisionPrimitive) *Entity {
 	entity := Entity{pos, vel, bound, INVALID_ENTITY_ID}
 	collection.addEntity(&entity)
-	return entity
+	return &entity
+}
+
+// Returns true if this object can be appended
+func (collection *EntityCollection) Append(entity *Entity) bool {
+	return collection.addEntity(entity)
 }
 
 // Returns the number of game objects in the collection
@@ -38,6 +43,6 @@ func (collection EntityCollection) Count() int {
 	return len(collection.objects)
 }
 
-func (collection *EntityCollection) Get(id int) Entity {
-	return collection.objects[id]
+func (collection *EntityCollection) Get(id int) *Entity {
+	return &collection.objects[id]
 }
