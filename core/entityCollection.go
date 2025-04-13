@@ -1,6 +1,8 @@
 package core
 
 // Collection of Entities. Manages entity id assignment
+// TODO: Currently, if it runs out of Ids it doesn't attempt
+// to cycle (start over from beginning and search for empty slot)
 type EntityCollection struct {
 	objects []Entity
 	id      uint32 // Default is INVALID_ENTITY_ID
