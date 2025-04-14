@@ -45,3 +45,7 @@ func (entity *Entity) DoTick(dt float64) {
 func (entity Entity) GetId() uint32 {
 	return entity.id
 }
+
+func (entity *Entity) Invalidate() {
+	entity.id = INVALID_ENTITY_ID
+}
