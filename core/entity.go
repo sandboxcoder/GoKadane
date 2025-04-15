@@ -46,6 +46,7 @@ func (entity Entity) GetId() uint32 {
 	return entity.id
 }
 
+// Invoke this when an Entity "dies"
 func (entity *Entity) Invalidate() {
 	entity.id = INVALID_ENTITY_ID
 }
