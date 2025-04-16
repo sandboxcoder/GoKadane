@@ -69,3 +69,17 @@ func TestEntity_DoTick(t *testing.T) {
 		t.Errorf("result != expected, velocity %+v", obj1.GetVelocity())
 	}
 }
+
+func TestEntity_Invalidation(t *testing.T) {
+	zeroPos := Vector3{0, 0, 0}
+	sphere := Sphere{zeroPos, 5}
+	spherePrimitive := sphere.GetPrimitive()
+	obj1 := CreateEntity(zeroPos, spherePrimitive)
+	obj1.id = 1
+	obj1.Invalidate()
+	result := obj1.GetId() == INVALID_ENTITY_ID
+	expect := true
+	if result != expect {
+		t.Errorf("result != expected, returned %+v", result)
+	}
+}
