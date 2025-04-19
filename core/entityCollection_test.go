@@ -44,3 +44,20 @@ func TestEntityCollection_GetEntity(t *testing.T) {
 		t.Errorf("result != expected, returned %+v", result)
 	}
 }
+
+func TestEntityCollection_Count(t *testing.T) {
+	zeroPos := Vector3{0, 0, 0}
+	sphere := Sphere{zeroPos, 5}
+	spherePrimitive := sphere.GetPrimitive()
+	collection := EntityCollection{}
+	collection.AddEntity(zeroPos, spherePrimitive)
+	result := collection.Count() == 1
+	if result != true {
+		t.Errorf("result != expected, returned %+v instead of 1", result)
+	}
+	collection.AddEntity(zeroPos, spherePrimitive)
+
+	if collection.Count() != 2 {
+		t.Errorf("result != 2, returned %+v", result)
+	}
+}
