@@ -50,6 +50,9 @@ func TestEntityCollection_Count(t *testing.T) {
 	sphere := Sphere{zeroPos, 5}
 	spherePrimitive := sphere.GetPrimitive()
 	collection := EntityCollection{}
+	if collection.Count() != 0 {
+		t.Errorf("result != 0")
+	}
 	collection.AddEntity(zeroPos, spherePrimitive)
 	result := collection.Count() == 1
 	if result != true {
