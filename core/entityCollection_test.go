@@ -70,12 +70,15 @@ func TestEntityCollection_Append(t *testing.T) {
 	sphere := Sphere{zeroPos, 5}
 	spherePrimitive := sphere.GetPrimitive()
 	collection := EntityCollection{}
-	a1 := Entity{zeroPos, zeroPos, spherePrimitive, 0}
+	a1 := Entity{zeroPos, zeroPos, spherePrimitive, INVALID_ENTITY_ID}
 	wasAdded := collection.Append(&a1)
 	if collection.Count() != 1 {
 		t.Errorf("Count != 1")
 	}
 	if wasAdded != true {
 		t.Errorf("Append failed")
+	}
+	if a1.id != 1 {
+		t.Errorf("Wrong entity id. Should have been reset")
 	}
 }
