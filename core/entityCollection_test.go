@@ -64,3 +64,18 @@ func TestEntityCollection_Count(t *testing.T) {
 		t.Errorf("result != 2, returned %+v", result)
 	}
 }
+
+func TestEntityCollection_Append(t *testing.T) {
+	zeroPos := Vector3{0, 0, 0}
+	sphere := Sphere{zeroPos, 5}
+	spherePrimitive := sphere.GetPrimitive()
+	collection := EntityCollection{}
+	a1 := Entity{zeroPos, zeroPos, spherePrimitive, 0}
+	wasAdded := collection.Append(&a1)
+	if collection.Count() != 1 {
+		t.Errorf("Count != 1")
+	}
+	if wasAdded != true {
+		t.Errorf("Append failed")
+	}
+}
