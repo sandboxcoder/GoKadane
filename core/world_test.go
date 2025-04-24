@@ -73,3 +73,12 @@ func TestWorld_Reset(t *testing.T) {
 		t.Errorf("result != expected, returned %+v instead of %+v", result, expected)
 	}
 }
+
+func TestWorld_GetNumEntities(t *testing.T) {
+	list := getEntities()
+	world := CreateWorld(list)
+	result := world.GetNumEntities()
+	if result != 2 {
+		t.Errorf("result != 2, returned %+v instead of 2", result)
+	}
+}
