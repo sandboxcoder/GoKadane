@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestOverlaps(t *testing.T) {
+func Test_BoxOverlaps(t *testing.T) {
 	center := Vector3{0, 0, 0}
 	b1 := Box{Center: center, Extent: Vector3{X: 5.0, Y: 5.0, Z: 5.0}}
 	detectedCollision := b1.Overlaps(b1)
@@ -13,7 +13,7 @@ func TestOverlaps(t *testing.T) {
 	}
 }
 
-func TestMax(t *testing.T) {
+func Test_BoxMax(t *testing.T) {
 	center := Vector3{1, 1, 1}
 	b1 := Box{Center: center, Extent: Vector3{X: 5.0, Y: 5.0, Z: 5.0}}
 	max := b1.GetMax()
@@ -23,7 +23,7 @@ func TestMax(t *testing.T) {
 	}
 }
 
-func TestMin(t *testing.T) {
+func Test_BoxMin(t *testing.T) {
 	center := Vector3{1, 1, 1}
 	b1 := Box{Center: center, Extent: Vector3{X: 5.0, Y: 5.0, Z: 5.0}}
 	result := b1.GetMin()
@@ -33,7 +33,7 @@ func TestMin(t *testing.T) {
 	}
 }
 
-func TestExtent(t *testing.T) {
+func Test_BoxExtent(t *testing.T) {
 	center := Vector3{0, 0, 0}
 	b1 := Box{Center: center, Extent: Vector3{X: 5.0, Y: 5.0, Z: 5.0}}
 	result := b1.GetSize()
