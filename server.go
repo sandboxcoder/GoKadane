@@ -44,7 +44,7 @@ func main() {
 	// Register handlers.
 	// All requests not otherwise mapped with go to greet.
 	// /version is mapped specifically to version.
-	http.HandleFunc("/", runGame)
+	http.HandleFunc("/api/game", runGame)
 	http.HandleFunc("/version", version)
 
 	log.Printf("serving http://%s\n", *addr)
