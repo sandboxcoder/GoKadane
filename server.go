@@ -2,12 +2,14 @@ package main
 
 import (
 	"Kadane/core"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"html"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"runtime/debug"
 	"time"
 )
@@ -27,6 +29,10 @@ var (
 	addr = flag.String("addr", "localhost:8080", "address to serve")
 )
 
+type Message struct {
+	Text string `json:"text"`
+}
+
 func main() {
 	// Parse flags.
 	flag.Usage = usage
@@ -40,6 +46,10 @@ func main() {
 
 	world = CreateGameWorld()
 	go gameLoop()
+
+	// Serve static files from the "frontend/build" directory
+	fs := http.FileServer(http.Dir(filepath.Join(".", "client", "build")))
+	http.Handle("/", fs)
 
 	// Register handlers.
 	// All requests not otherwise mapped with go to greet.
@@ -63,8 +73,10 @@ func version(w http.ResponseWriter, r *http.Request) {
 }
 
 func runGame(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<!DOCTYPE html>\n")
-	fmt.Fprintf(w, "Currently there are %d entities in the game world.\n", world.GetNumEntities())
+	formatted := fmt.Sprintf("Currently there are %d entities in the game world.", world.GetNumEntities())
+	message := Message{Text: formatted}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(message)
 }
 
 // Game loop function
