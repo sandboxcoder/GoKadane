@@ -4,6 +4,10 @@ Basic game world simulation written in Go. The math functions are using linear a
 # How to run
 Make sure [Golang](https://go.dev/doc/install) is installed. From command line just type:
 ```
+cd client
+npm install
+npm run build
+cd ..
 go run .
 ```
 This will start the server. Connect to the server (http://localhost:8080 by default), to view the web page.
