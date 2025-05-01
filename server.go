@@ -54,7 +54,7 @@ func main() {
 	// Register handlers.
 	// All requests not otherwise mapped with go to greet.
 	// /version is mapped specifically to version.
-	http.HandleFunc("/api/game", runGame)
+	http.HandleFunc("/api/game", gameApiHandler)
 	http.HandleFunc("/version", version)
 
 	log.Printf("serving http://%s\n", *addr)
@@ -72,7 +72,7 @@ func version(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s\n", html.EscapeString(info.String()))
 }
 
-func runGame(w http.ResponseWriter, r *http.Request) {
+func gameApiHandler(w http.ResponseWriter, r *http.Request) {
 	formatted := fmt.Sprintf("Currently there are %d entities in the game world.", world.GetNumEntities())
 	message := Message{Text: formatted}
 	w.Header().Set("Content-Type", "application/json")
