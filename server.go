@@ -55,13 +55,13 @@ func main() {
 	// All requests not otherwise mapped with go to greet.
 	// /version is mapped specifically to version.
 	http.HandleFunc("/api/game", gameApiHandler)
-	http.HandleFunc("/version", version)
+	http.HandleFunc("/version", versionApiHandler)
 
 	log.Printf("serving http://%s\n", *addr)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
 
-func version(w http.ResponseWriter, r *http.Request) {
+func versionApiHandler(w http.ResponseWriter, r *http.Request) {
 	info, ok := debug.ReadBuildInfo()
 	if !ok {
 		http.Error(w, "no build information available", 500)
