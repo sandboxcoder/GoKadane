@@ -5,12 +5,10 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"html"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
-	"runtime/debug"
 	"time"
 )
 
@@ -52,24 +50,10 @@ func main() {
 	http.Handle("/", fs)
 
 	// Register handlers.
-	// All requests not otherwise mapped with go to greet.
-	// /version is mapped specifically to version.
 	http.HandleFunc("/api/game", gameApiHandler)
-	http.HandleFunc("/version", versionApiHandler)
 
 	log.Printf("serving http://%s\n", *addr)
 	log.Fatal(http.ListenAndServe(*addr, nil))
-}
-
-func versionApiHandler(w http.ResponseWriter, r *http.Request) {
-	info, ok := debug.ReadBuildInfo()
-	if !ok {
-		http.Error(w, "no build information available", 500)
-		return
-	}
-
-	fmt.Fprintf(w, "<!DOCTYPE html>\n<pre>\n")
-	fmt.Fprintf(w, "%s\n", html.EscapeString(info.String()))
 }
 
 func gameApiHandler(w http.ResponseWriter, r *http.Request) {
