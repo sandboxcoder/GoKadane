@@ -45,7 +45,7 @@ func main() {
 	world = CreateGameWorld()
 	go gameLoop()
 
-	// Serve static files from the "frontend/build" directory
+	// Serve static files from the "client/build" directory
 	fs := http.FileServer(http.Dir(filepath.Join(".", "client", "build")))
 	http.Handle("/", fs)
 
