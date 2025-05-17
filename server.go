@@ -2,14 +2,13 @@ package main
 
 import (
 	"Kadane/core"
-	"encoding/json"
 	"flag"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 var world core.World
@@ -45,22 +44,21 @@ func main() {
 	world = CreateGameWorld()
 	go gameLoop()
 
-	// Serve static files from the "client/build" directory
-	fs := http.FileServer(http.Dir(filepath.Join(".", "client", "build")))
-	http.Handle("/", fs)
+	router := gin.Default()
+	router.GET("/api/game", gameApiHandler)
+	router.Static("/static", "./client/build")
+	// serve index.html for unknown routes (SPA fallback)
+	router.NoRoute(func(c *gin.Context) {
+		c.File("./client/build/index.html")
+	})
 
-	// Register handlers.
-	http.HandleFunc("/api/game", gameApiHandler)
-
-	log.Printf("serving http://%s\n", *addr)
-	log.Fatal(http.ListenAndServe(*addr, nil))
+	router.Run("localhost:8080")
 }
 
-func gameApiHandler(w http.ResponseWriter, r *http.Request) {
+func gameApiHandler(c *gin.Context) {
 	formatted := fmt.Sprintf("Currently there are %d entities in the game world.", world.GetNumEntities())
 	message := Message{Text: formatted}
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(message)
+	c.IndentedJSON(http.StatusOK, message)
 }
 
 // Game loop function
