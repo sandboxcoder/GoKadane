@@ -48,3 +48,7 @@ func (collection EntityCollection) Count() int {
 func (collection *EntityCollection) Get(id int) *Entity {
 	return &collection.objects[id]
 }
+
+func (collection *EntityCollection) GetEntities() *[]Entity {
+	return &collection.objects
+}

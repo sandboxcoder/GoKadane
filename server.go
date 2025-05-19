@@ -26,10 +26,6 @@ var (
 	addr = flag.String("addr", "localhost:8080", "address to serve")
 )
 
-type Message struct {
-	Text string `json:"text"`
-}
-
 func main() {
 	// Parse flags.
 	flag.Usage = usage
@@ -46,6 +42,8 @@ func main() {
 
 	router := gin.Default()
 	router.GET("/api/game", gameApiHandler)
+	// All requests will need the static prefix to avoid filepath collision.
+	// See: https://stackoverflow.com/questions/36357791/gin-router-path-segment-conflicts-with-existing-wildcard
 	router.Static("/static", "./client/build")
 	// serve index.html for unknown routes (SPA fallback)
 	router.NoRoute(func(c *gin.Context) {
@@ -56,9 +54,14 @@ func main() {
 }
 
 func gameApiHandler(c *gin.Context) {
-	formatted := fmt.Sprintf("Currently there are %d entities in the game world.", world.GetNumEntities())
-	message := Message{Text: formatted}
-	c.IndentedJSON(http.StatusOK, message)
+	entCollection := world.GetCollection()
+	list := make([]core.EntityInfo, 0, 5)
+	entityList := *entCollection.GetEntities()
+	for _, value := range entityList {
+		entityInfo := core.CreateInfo(&value)
+		list = append(list, entityInfo)
+	}
+	c.IndentedJSON(http.StatusOK, list)
 }
 
 // Game loop function
