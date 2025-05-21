@@ -3,12 +3,12 @@ import Accordion from 'react-bootstrap/Accordion';
 import BasicScene from './components/BasicScene';
 
 function App() {
-  const [message, setMessage] = useState('');
+  const [entities, setEntities] = useState(null);
 
   useEffect(() => {
-    fetch('/api/game')
+    fetch('http://localhost:8080/api/game')
       .then(res => res.json())
-      .then(data => setMessage(data.text))
+      .then(data => setEntities(data))
       .catch(err => console.error("Error fetching message:", err));
   }, []);
 
@@ -17,7 +17,15 @@ function App() {
       <Accordion.Item eventKey="0">
         <Accordion.Header>Scene Info</Accordion.Header>
         <Accordion.Body>
-          {message}
+          {entities ? (
+            entities.map(entity => (
+              <div key={entity.Id}>
+                Position: ({entity.Position.X}, {entity.Position.Y}, {entity.Position.Z})
+              </div>
+            ))
+          ) : (
+            <div>Loading...</div>
+          )}
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">

@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -41,10 +42,8 @@ func main() {
 	go gameLoop()
 
 	router := gin.Default()
+	router.Use(cors.Default())
 	router.GET("/api/game", gameApiHandler)
-	// All requests will need the static prefix to avoid filepath collision.
-	// See: https://stackoverflow.com/questions/36357791/gin-router-path-segment-conflicts-with-existing-wildcard
-	router.Static("/static", "./client/build")
 	// serve index.html for unknown routes (SPA fallback)
 	router.NoRoute(func(c *gin.Context) {
 		c.File("./client/build/index.html")
