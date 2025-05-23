@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
 import BasicScene from './components/BasicScene';
 
 function App() {
@@ -13,10 +12,8 @@ function App() {
   }, []);
 
   return (
-    <Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Scene Info</Accordion.Header>
-        <Accordion.Body>
+    <div>
+      <div key = "entityInfo">
           {entities ? (
             entities.map(entity => (
               <div key={entity.Id}>
@@ -26,19 +23,15 @@ function App() {
           ) : (
             <div>Loading...</div>
           )}
-        </Accordion.Body>
-      </Accordion.Item>
-      <Accordion.Item eventKey="1">
-        <Accordion.Header>3D Scene</Accordion.Header>
-        <Accordion.Body>
+      </div>
+      <div key = "scene">
           {entities ? (
             <BasicScene entities={entities} />
           ) : (
             <div>Loading 3D Scene...</div>
           )}
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+      </div>
+    </div>
   );
 }
 
