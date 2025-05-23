@@ -1,22 +1,39 @@
-// MyScene.js
-import React from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
 
-function Box() {
+function Box(props) {
+  // This reference will give us direct access to the mesh
+  const meshRef = useRef()
+  // Set up state for the hovered and active state
+  const [hovered, setHover] = useState(false)
+  const [active, setActive] = useState(false)
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame((state, delta) => (meshRef.current.rotation.y += delta))
+  // Return view, these are regular three.js elements expressed in JSX
   return (
-    <mesh rotation={[0.4, 0.2, 0]}>
+    <mesh
+      {...props}
+      ref={meshRef}
+      scale={active ? 1.5 : 1}
+      onClick={(event) => setActive(!active)}
+      onPointerOver={(event) => setHover(true)}
+      onPointerOut={(event) => setHover(false)}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="tomato" />
+      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
-  );
+  )
 }
 
-export default function BasicScene() {
+export default function BasicScene({ entities }) {
   return (
     <Canvas>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <Box />
+        {entities ? entities.map(entity => (
+          <Box position={[entity.Position.X, entity.Position.Y, entity.Position.Z]} />
+        )) : (
+          <div key="missingList">Missing</div>
+        )}
     </Canvas>
   );
 }

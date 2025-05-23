@@ -31,7 +31,11 @@ function App() {
       <Accordion.Item eventKey="1">
         <Accordion.Header>3D Scene</Accordion.Header>
         <Accordion.Body>
-          <BasicScene></BasicScene>
+          {entities ? (
+            <BasicScene entities={entities} />
+          ) : (
+            <div>Loading 3D Scene...</div>
+          )}
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

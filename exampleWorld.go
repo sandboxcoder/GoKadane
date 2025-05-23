@@ -16,7 +16,7 @@ func getEntities() core.EntityCollection {
 	spherePrimitive := sphere.GetPrimitive()
 	collection.AddEntity(zeroPos, spherePrimitive)
 
-	pos2 := core.Vector3{X: 10, Y: 0, Z: 0}
+	pos2 := core.Vector3{X: 2, Y: 0, Z: 0}
 	sphere2 := core.Sphere{Center: pos2, Radius: 5}
 	collection.AddEntity(pos2, sphere2.GetPrimitive())
 
