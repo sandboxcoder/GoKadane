@@ -14,22 +14,22 @@ function App() {
   return (
     <div>
       <div key = "entityInfo">
-          {entities ? (
-            entities.map(entity => (
-              <div key={entity.Id}>
-                Position: ({entity.Position.X}, {entity.Position.Y}, {entity.Position.Z})
-              </div>
-            ))
-          ) : (
-            <div>Loading...</div>
-          )}
+        {entities ? (
+          entities.map(entity => (
+            <div key={entity.Id}>
+              Position: ({entity.Position.X}, {entity.Position.Y}, {entity.Position.Z})
+            </div>
+          ))
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
       <div key = "scene">
-          {entities ? (
-            <BasicScene entities={entities} />
-          ) : (
-            <div>Loading 3D Scene...</div>
-          )}
+        {entities ? (
+          <BasicScene entities={entities} />
+        ) : (
+          <div>Loading 3D Scene...</div>
+        )}
       </div>
     </div>
   );
