@@ -4,7 +4,15 @@ Basic game world simulation written in Go/React/WebGL. The math functions are us
 # How to run
 Make sure [Golang](https://go.dev/doc/install) is installed (minimum `1.23`). 
 
-The command below will build the frontend client code and run the Go server:
+Easiest way to run the app is within Visual Studio Code via the "Run Go and React" option in the dropdown (if you already built the react client). If not, then at least build the react client like this:
+```
+cd client
+npm install
+npm run build
+```
+
+
+Alternate method to build & run both apps from within a bash terminal. The command below will build the frontend client code and run the Go server:
 ```
 cd client
 npm install
