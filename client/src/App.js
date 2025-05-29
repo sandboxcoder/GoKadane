@@ -14,6 +14,7 @@ function App() {
   return (
     <div>
       <div key = "entityInfo">
+        <div key="text">Entity List</div>
         {entities ? (
           entities.map(entity => (
             <div key={entity.Id}>
