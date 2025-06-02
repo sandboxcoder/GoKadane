@@ -12,7 +12,7 @@ func TestSphereCollision(t *testing.T) {
 	}
 }
 
-func TestSphereCollision_Seperated(t *testing.T) {
+func TestSphereCollision_Separated(t *testing.T) {
 	s1 := Sphere{Vector3{0, 0, 0}, 20}
 	s2 := Sphere{Vector3{100, 0, 0}, 20}
 	detectedCollision := IsColliding(s1, s2)
